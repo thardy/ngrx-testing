@@ -30,8 +30,9 @@ export class ProductEffects {
       .pipe(
         ofType(ProductActions.existingProductSaved),
         concatMap(action => this.productService.updateProduct(action.product)),
+        map((product) => ProductActions.productUpdated({product: product}))
       ),
-    {dispatch: false}
+    //{dispatch: false} // this would cause the effect to not dispatch a new action (which is the default)
   );
 
   deleteProduct$ = createEffect(

@@ -46,7 +46,9 @@ export const reducer = createReducer(
       }
     }),
 
-  on(ProductActions.productUpdated,
+  // we are taking an optimistic approach to UX updates - changing the UX before the back-end completes the update
+  //  if we didn't want to be optimistic, we could subscribe to ProductActions.productUpdated instead
+  on(ProductActions.existingProductSaved,
     (state, action) => {
       const products = [...state.products];
       let foundIndex = state.products.findIndex((product) => product.id === action.product.id)
