@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {StoreModule} from '@ngrx/store';
-import {ProductsModule} from './products/products.module';
 import { EffectsModule } from '@ngrx/effects';
 import {HttpClientModule} from '@angular/common/http';
 import {Routes} from '@angular/router';
@@ -13,17 +12,22 @@ import {environment} from '../environments/environment';
 import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
 import {metaReducers} from './reducers';
 
-const routes: Routes = [
-  {
-    path: 'products',
-    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule),
-    // canActivate: [AuthGuard]
-  },
-  {
-    path: '**',
-    redirectTo: '/'
-  }
-];
+// const routes: Routes = [
+//   {
+//     path: 'products',
+//     loadChildren: () => import('./products/products.module').then(m => m.ProductsModule),
+//     // canActivate: [AuthGuard]
+//   },
+//   {
+//     path: 'products2',
+//     loadChildren: () => import('./products2/products2.module').then(m => m.Products2Module),
+//     // canActivate: [AuthGuard]
+//   },
+//   {
+//     path: '**',
+//     redirectTo: '/'
+//   }
+// ];
 
 @NgModule({
   declarations: [

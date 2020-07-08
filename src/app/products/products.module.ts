@@ -26,7 +26,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     CommonModule,
     ProductsRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forFeature(fromProducts.productsFeatureKey, fromProducts.reducer),
+    StoreModule.forFeature(fromProducts.productsFeatureKey, fromProducts.reducer, { metaReducers: fromProducts.metaReducers }),
     EffectsModule.forFeature([ProductEffects]),
   ],
   providers: [

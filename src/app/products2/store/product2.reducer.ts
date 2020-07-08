@@ -1,19 +1,18 @@
 import {createReducer, MetaReducer, on, State} from '@ngrx/store';
-import {Product} from '../product.model';
-import {ProductActions} from './product.actions-typed';
+import {Product2} from '../product2.model';
+import {Product2Actions} from './product2.actions-typed';
 import * as _ from 'lodash';
 import {environment} from '../../../environments/environment';
-import {Product2State} from '../../products2/store/product2.reducer';
 
-export const productsFeatureKey = 'products';
+export const products2FeatureKey = 'products2';
 
-export interface ProductState {
-  products: Product[],
+export interface Product2State {
+  products: Product2[],
   loading: boolean,
   loaded: boolean
 }
 
-export const initialState: ProductState = {
+export const initialState: Product2State = {
   products: [],
   loading: false,
   loaded: false
@@ -22,7 +21,7 @@ export const initialState: ProductState = {
 export const reducer = createReducer(
   initialState,
 
-  on(ProductActions.loadProducts,
+  on(Product2Actions.loadProducts,
     (state, action) => {
       return {
         ...state,
@@ -30,7 +29,7 @@ export const reducer = createReducer(
       }
     }),
 
-  on(ProductActions.productsLoaded,
+  on(Product2Actions.productsLoaded,
     (state, action) => {
       return {
         ...state,
@@ -40,7 +39,7 @@ export const reducer = createReducer(
       }
     }),
 
-  on(ProductActions.productCreated,
+  on(Product2Actions.productCreated,
     (state, action) => {
       return {
         ...state,
@@ -50,7 +49,7 @@ export const reducer = createReducer(
 
   // we are taking an optimistic approach to UX updates - changing the UX before the back-end completes the update
   //  if we didn't want to be optimistic, we could subscribe to ProductActions.productUpdated instead
-  on(ProductActions.existingProductSaved,
+  on(Product2Actions.existingProductSaved,
     (state, action) => {
       const products = [...state.products];
       let foundIndex = state.products.findIndex((product) => product.id === action.product.id)
@@ -61,7 +60,7 @@ export const reducer = createReducer(
       }
     }),
 
-  on(ProductActions.deleteProduct,
+  on(Product2Actions.deleteProduct,
     (state, action) => {
       const filteredProducts = state.products.filter((product) => product.id !== action.product.id)
       return {
@@ -79,4 +78,4 @@ export const reducer = createReducer(
   //   }),
 );
 
-export const metaReducers: MetaReducer<ProductState>[] = !environment.production ? [] : [];
+export const metaReducers: MetaReducer<Product2State>[] = !environment.production ? [] : [];

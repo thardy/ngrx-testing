@@ -1,0 +1,16 @@
+<h2>Product Form</h2>
+
+<ng-container [formGroup]="form">
+  <input placeholder="Name" formControlName="name">
+  <textarea matInput placeholder="Description" formControlName="description"></textarea>
+  <input placeholder="Price" formControlName="price">
+  <input placeholder="Quantity" formControlName="quantity">
+</ng-container>
+
+<button (click)="onCancel()">
+  Cancel
+</button>
+
+<button (click)="onSave()">
+  Save
+</button>

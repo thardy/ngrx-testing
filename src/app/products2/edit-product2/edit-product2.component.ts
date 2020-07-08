@@ -1,19 +1,19 @@
 import {Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Product} from '../product.model';
+import {Product2} from '../product2.model';
 import {Observable} from 'rxjs';
 import {AppState} from '../../reducers';
 import {Store} from '@ngrx/store';
-import {ProductActions} from '../store/product.actions-typed';
+import {Product2Actions} from '../store/product2.actions-typed';
 
 @Component({
-  selector: 'my-edit-product',
-  templateUrl: './edit-product.component.html',
-  styleUrls: ['./edit-product.component.sass'],
+  selector: 'my-edit-product2',
+  templateUrl: './edit-product2.component.html',
+  styleUrls: ['./edit-product2.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditProductComponent implements OnInit {
-  @Input() product: Product;
+export class EditProduct2Component implements OnInit {
+  @Input() product: Product2;
   @Input() mode: 'create' | 'update';
   @Output() formClosed = new EventEmitter();
   form: FormGroup;
@@ -51,16 +51,16 @@ export class EditProductComponent implements OnInit {
   }
 
   onSave() {
-    const product: Product = {
+    const product: Product2 = {
       ...this.product,
       ...this.form.value
     };
 
     if (this.mode === 'create') {
-      this.store.dispatch(ProductActions.newProductSaved({product}));
+      this.store.dispatch(Product2Actions.newProductSaved({product}));
     }
     else if (this.mode === 'update') {
-      this.store.dispatch(ProductActions.existingProductSaved({product}));
+      this.store.dispatch(Product2Actions.existingProductSaved({product}));
     }
 
     this.formClosed.emit();
