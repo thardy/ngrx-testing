@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {AppState} from '../../reducers';
 import {Store} from '@ngrx/store';
 import {Product2Actions} from '../store/product2.actions-typed';
+import {Update} from '@ngrx/entity';
 
 @Component({
   selector: 'my-edit-product2',
@@ -56,11 +57,16 @@ export class EditProduct2Component implements OnInit {
       ...this.form.value
     };
 
+    const update: Update<Product2> = {
+      id: product.id,
+      changes: product
+    };
+
     if (this.mode === 'create') {
       this.store.dispatch(Product2Actions.newProductSaved({product}));
     }
     else if (this.mode === 'update') {
-      this.store.dispatch(Product2Actions.existingProductSaved({product}));
+      this.store.dispatch(Product2Actions.existingProductSaved({update}));
     }
 
     this.formClosed.emit();

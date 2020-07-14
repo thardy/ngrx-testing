@@ -3,7 +3,7 @@ import {Product} from '../product.model';
 import {ProductActions} from './product.actions-typed';
 import * as _ from 'lodash';
 import {environment} from '../../../environments/environment';
-import {Product2State} from '../../products2/store/product2.reducer';
+import {Product2State} from '../../products2/store/product2.reducers';
 
 export const productsFeatureKey = 'products';
 

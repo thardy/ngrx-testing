@@ -26,8 +26,6 @@ export class ProductListComponent implements OnInit {
       .pipe(
         select(selectProductList)
       );
-
-    this.store.dispatch(ProductActions.loadProducts());
   }
 
   onEdit(product: Product) {

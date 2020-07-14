@@ -10,24 +10,7 @@ import {Routes} from '@angular/router';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
 import {RouterState, StoreRouterConnectingModule} from '@ngrx/router-store';
-import {metaReducers} from './reducers';
-
-// const routes: Routes = [
-//   {
-//     path: 'products',
-//     loadChildren: () => import('./products/products.module').then(m => m.ProductsModule),
-//     // canActivate: [AuthGuard]
-//   },
-//   {
-//     path: 'products2',
-//     loadChildren: () => import('./products2/products2.module').then(m => m.Products2Module),
-//     // canActivate: [AuthGuard]
-//   },
-//   {
-//     path: '**',
-//     redirectTo: '/'
-//   }
-// ];
+import {metaReducers, reducers} from './reducers';
 
 @NgModule({
   declarations: [
@@ -37,7 +20,7 @@ import {metaReducers} from './reducers';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {
+    StoreModule.forRoot(reducers, {
       metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,

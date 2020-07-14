@@ -1,7 +1,7 @@
 import {createAction, props} from '@ngrx/store';
 import {Product} from '../product.model';
 
-export const loadProducts = createAction('[Products List] Load Products');
+export const loadProducts = createAction('[Products Resolver] Load Products');
 export const productsLoaded = createAction('[loadProducts Effect] Products Loaded', props<{products: Product[]}>());
 export const newProductSaved = createAction('[Edit Product] New Product Saved', props<{product: Product}>());
 export const existingProductSaved = createAction('[Edit Product] Existing Product Saved', props<{product: Product}>());

@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Product2} from '../product2.model';
 import {Observable} from 'rxjs';
-import {selectProductList} from '../store/product2.selectors';
+import {isLoading, selectAllProducts} from '../store/product2.selectors';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
 import {Product2Actions} from '../store/product2.actions-typed';
@@ -14,7 +14,8 @@ import {Product2Actions} from '../store/product2.actions-typed';
 })
 export class Product2ListComponent implements OnInit {
 
-  products$: Observable<Product2[]>
+  products$: Observable<Product2[]>;
+  loading$: Observable<boolean>;
   editing = false;
   adding = false;
   selectedProduct: Product2;
@@ -24,10 +25,11 @@ export class Product2ListComponent implements OnInit {
   ngOnInit(): void {
     this.products$ = this.store
       .pipe(
-        select(selectProductList)
+        select(selectAllProducts)
       );
 
-    this.store.dispatch(Product2Actions.loadProducts());
+    this.loading$ = this.store
+      .pipe(select(isLoading))
   }
 
   onEdit(product: Product2) {

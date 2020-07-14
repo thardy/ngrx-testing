@@ -3,7 +3,7 @@
 <div>
   <ul>
     <li *ngFor="let product of products$ | async">
-      {{product.name}}<br/>
+      <a [routerLink]="['/products2', product.id]">{{product.name}}</a><br/>
       {{product.description}}<br/>
       {{product.price}}
       <button (click)="onEdit(product)">Edit</button>
@@ -13,7 +13,7 @@
 
   <button (click)="onAdd()">Add</button>
 
-  <my-edit-product2 *ngIf="editing" [product]="selectedProduct" [mode]="'update'" (close)="onFormClosed()"></my-edit-product2>
+  <my-edit-product2 *ngIf="editing" [product]="selectedProduct" [mode]="'update'" (formClosed)="onFormClosed()"></my-edit-product2>
 
-  <my-edit-product2 *ngIf="adding" [mode]="'create'" (close)="onFormClosed()"></my-edit-product2>
+  <my-edit-product2 *ngIf="adding" [mode]="'create'" (formClosed)="onFormClosed()"></my-edit-product2>
 </div>

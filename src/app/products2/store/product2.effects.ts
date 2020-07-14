@@ -4,6 +4,8 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Product2Actions} from './product2.actions-typed';
 import {concatMap, map} from 'rxjs/operators';
 import {Product2} from '../product2.model';
+import {AppState} from '../../reducers';
+import {Store} from '@ngrx/store';
 
 @Injectable()
 export class Product2Effects {
@@ -29,10 +31,10 @@ export class Product2Effects {
     () => this.actions$
       .pipe(
         ofType(Product2Actions.existingProductSaved),
-        concatMap(action => this.product2Service.updateProduct(action.product)),
-        map((product) => Product2Actions.productUpdated({product: product}))
+        concatMap(action => this.product2Service.updateProduct(action.update.id, action.update.changes)),
+        //map((product) => Product2Actions.productUpdated({product: product}))
       ),
-    //{dispatch: false} // this would cause the effect to not dispatch a new action (which is the default)
+    {dispatch: false} // don't dispatch a new action
   );
 
   deleteProduct$ = createEffect(
@@ -47,5 +49,6 @@ export class Product2Effects {
   );
 
   constructor(private actions$: Actions,
-              private product2Service: Product2Service) {}
+              private product2Service: Product2Service,
+              ) {}
 }
