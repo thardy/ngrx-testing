@@ -1,19 +1,20 @@
 import {Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Product} from '../product.model';
+import {Product3} from '../product3.model';
 import {Observable} from 'rxjs';
 import {AppState} from '../../store/reducers';
 import {Store} from '@ngrx/store';
-import {ProductActions} from '../store/product.actions-typed';
+import {Update} from '@ngrx/entity';
+import {Product3Service} from '../product3.service';
 
 @Component({
-  selector: 'my-edit-product',
-  templateUrl: './edit-product.component.html',
-  styleUrls: ['./edit-product.component.sass'],
+  selector: 'my-edit-product3',
+  templateUrl: './edit-product3.component.html',
+  styleUrls: ['./edit-product3.component.sass'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EditProductComponent implements OnInit {
-  @Input() product: Product;
+export class EditProduct3Component implements OnInit {
+  @Input() product: Product3;
   @Input() mode: 'create' | 'update';
   @Output() formClosed = new EventEmitter();
   form: FormGroup;
@@ -22,7 +23,7 @@ export class EditProductComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store<AppState>
+    private product3Service: Product3Service
   ) {
 
   }
@@ -51,19 +52,26 @@ export class EditProductComponent implements OnInit {
   }
 
   onSave() {
-    const product: Product = {
+    const product: Product3 = {
       ...this.product,
       ...this.form.value
     };
 
-    if (this.mode === 'create') {
-      this.store.dispatch(ProductActions.newProductSaved({product}));
+    if (this.mode === 'update') {
+      // - updates the store
+      // - makes http PUT call to backend
+      // - emits ngrx actions
+      this.product3Service.update(product);
+      this.formClosed.emit();
     }
-    else if (this.mode === 'update') {
-      this.store.dispatch(ProductActions.existingProductSaved({product}));
+    else if (this.mode === 'create') {
+      this.product3Service.add(product)
+        .subscribe((product) => {
+          console.log("New Product", product);
+          this.formClosed.emit();
+        });
     }
 
-    this.formClosed.emit();
   }
 
 }

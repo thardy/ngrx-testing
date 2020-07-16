@@ -2,7 +2,7 @@ import {Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy}
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Product2} from '../product2.model';
 import {Observable} from 'rxjs';
-import {AppState} from '../../reducers';
+import {AppState} from '../../store/reducers';
 import {Store} from '@ngrx/store';
 import {Product2Actions} from '../store/product2.actions-typed';
 import {Update} from '@ngrx/entity';

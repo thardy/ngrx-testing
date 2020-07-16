@@ -4,7 +4,7 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Product2Actions} from './product2.actions-typed';
 import {concatMap, map} from 'rxjs/operators';
 import {Product2} from '../product2.model';
-import {AppState} from '../../reducers';
+import {AppState} from '../../store/reducers';
 import {Store} from '@ngrx/store';
 
 @Injectable()
@@ -44,8 +44,9 @@ export class Product2Effects {
         concatMap(action => {
           return this.product2Service.deleteProduct(action.product);
         }),
-        map((product) => Product2Actions.productDeleted({product: product}))
-      )
+        //map((product) => Product2Actions.productDeleted({product: product}))
+      ),
+    {dispatch: false} // don't dispatch a new action
   );
 
   constructor(private actions$: Actions,

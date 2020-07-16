@@ -9,7 +9,7 @@ export const routes: Routes = [
     path: '',
     component: Product2ListComponent,
     resolve: {
-      courses: Products2Resolver
+      products: Products2Resolver
     }
   },
   {

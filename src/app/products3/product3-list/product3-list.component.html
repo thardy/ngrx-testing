@@ -1,0 +1,19 @@
+<h1>Product3 List</h1>
+
+<div>
+  <ul>
+    <li *ngFor="let product of products$ | async">
+      <a [routerLink]="['/products3', product.id]">{{product.name}}</a><br/>
+      {{product.description}}<br/>
+      {{product.price}}
+      <button (click)="onEdit(product)">Edit</button>
+      <button (click)="onDelete(product)">Delete</button>
+    </li>
+  </ul>
+
+  <button (click)="onAdd()">Add</button>
+
+  <my-edit-product3 *ngIf="editing" [product]="selectedProduct" [mode]="'update'" (formClosed)="onFormClosed()"></my-edit-product3>
+
+  <my-edit-product3 *ngIf="adding" [mode]="'create'" (formClosed)="onFormClosed()"></my-edit-product3>
+</div>

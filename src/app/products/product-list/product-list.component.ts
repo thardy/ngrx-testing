@@ -3,7 +3,7 @@ import {Product} from '../product.model';
 import {Observable} from 'rxjs';
 import {selectProductList} from '../store/product.selectors';
 import {select, Store} from '@ngrx/store';
-import {AppState} from '../../reducers';
+import {AppState} from '../../store/reducers';
 import {ProductActions} from '../store/product.actions-typed';
 
 @Component({

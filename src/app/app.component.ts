@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
-import {AppState} from './reducers';
+import {AppState} from './store/reducers';
 import {Store} from '@ngrx/store';
 
 @Component({
