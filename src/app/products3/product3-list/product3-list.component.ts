@@ -45,7 +45,7 @@ export class Product3ListComponent implements OnInit {
     //     }),
     //     map(([associatedItems, product]) => associatedItems.filter(associatedItem => associatedItem.productId === product.id))
     //   );
-    // this.itemsLoading$ = this.associatedItemsService.loading$;
+    // this.itemsLoading$ = this.associatedItemsService.loading$.pipe(delay(0)); // delay eliminates "changed after it was checked" error
   }
 
   // loadAssociatedItemsPage(product: Product3) {
