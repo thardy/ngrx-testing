@@ -32,9 +32,8 @@ export class Product2Effects {
       .pipe(
         ofType(Product2Actions.existingProductSaved),
         concatMap(action => this.product2Service.updateProduct(action.update.id, action.update.changes)),
-        //map((product) => Product2Actions.productUpdated({product: product}))
-      ),
-    {dispatch: false} // don't dispatch a new action
+        map((product) => Product2Actions.productUpdated({product: product}))
+      )
   );
 
   deleteProduct$ = createEffect(
@@ -44,9 +43,8 @@ export class Product2Effects {
         concatMap(action => {
           return this.product2Service.deleteProduct(action.product);
         }),
-        //map((product) => Product2Actions.productDeleted({product: product}))
-      ),
-    {dispatch: false} // don't dispatch a new action
+        map((product) => Product2Actions.productDeleted({product: product}))
+      )
   );
 
   constructor(private actions$: Actions,
